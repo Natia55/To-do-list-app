@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<h1>Hello! Welcome to the To-Do List App</h1>
+<p>Here is a list of your tasks:</p>
+
+<ul>
+  {% for task in tasks %}
+    <li>{{ task.title}}, {{task.description }}
+      <form action="{% url 'delete_tasks' task.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+      </form>
+
+      <form action="{% url 'update_tasks' task.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Update">
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<p>Want to create a new task? <a href="{% url 'create_tasks' %}">Click here</a>.</p>
